@@ -1,4 +1,6 @@
-<?php include('koneksi.php')?>
+<?php
+include('koneksi.php');
+?>
 <html>
 <head>
 	<title>form login</title>
@@ -17,12 +19,12 @@
 			</div>
 
 				<form action="login.php" method="post" >
-				<?php include('errors.php') ?><br>
+				<?php include('errors.php'); ?><br>
 				<center>
 					<p>Username</p>
-					<input type="text" name="username"  placeholder="Username"/><br><br>
+					<input type="text" name="username"  placeholder="Username" value=""/><br><br>
 					<p>Password</p>
-					<input type="password" name="pass" id="password" placeholder="Password"/><br><br>
+					<input type="password" name="pass" id="password" placeholder="Password" value=""/><br><br>
 
 
 					<button type="submit" name="Masuk" class="btn">
