@@ -138,44 +138,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 </div>
 
 
-	<!-- <div class="content">
- 	 <div class="box-daftar">
 
- 		 <div class="header-daftar">
- 		 <center><img src="img/upn.png" class="user"></center>
- 		 <center>SIAKAD UPNVJ<br>
- 		 Log In</center><br>
- 		 </div>
-
- 			 <form action="login.php" method="post" >
- 			 <br>
- 			 <center>
- 				 <p>Username</p>
- 				 <input type="text" name="userkode"  placeholder="Username" value=""/><br><br>
- 				 <p>Password</p>
- 				 <input type="password" name="pass" id="password" placeholder="Password" value=""/><br><br>
-
-
- 				 <button type="submit" name="Masuk" class="btn">
- 					 Masuk
- 				 </button><br><br>
-
- 			 </center>
-
-
- 			 </form>
-
-
- <center>
- 		 <div class="art-footer-text">
- 	 <p>
-  Copyright ©  2019 RAS. All rights reserved.</p>
-  </div>
- </center>
- 	 </div>
-
-  </div> -->
-<!-- </div> -->
 
 </body>
 </html>
