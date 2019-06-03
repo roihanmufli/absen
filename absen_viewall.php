@@ -19,9 +19,10 @@ include('header.php');
       <table class="table table-striped">
         <th>No</th>
         <th>Dates</th>
+        <th>Mata Kuliah</th>
         <th>Show Attendance</th>
 
-        <?php $result=mysqli_query($conn,"select distinct date from attendance_records");
+        <?php $result=mysqli_query($conn,"select distinct date,nama_matkul from attendance_records");
           $serialnumber = 0;
           while($row=mysqli_fetch_array($result)){
             $serialnumber++;
@@ -29,10 +30,13 @@ include('header.php');
           <tr>
           <td><?php echo $serialnumber; ?></td>
           <td><?php echo $row['date']; ?>
+          <td><?php echo $row['nama_matkul']; ?>
+
           </td>
           <td>
             <form action="absen_show.php" method="POST">
               <input type="hidden" name="date" value="<?php echo $row['date'] ?>">
+              <input type="hidden" name="nama_matkul" value="<?php echo $row['nama_matkul'] ?>">
               <input type="submit" value="Show Attendance" class="btn btn-primary">
             </form>
           </td>

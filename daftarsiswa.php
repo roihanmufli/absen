@@ -1,7 +1,7 @@
 <?php
 include("header.php");
 include("koneksi.php");
-$query=mysqli_query($conn, "SELECT nim,name,matkul FROM d_mahasiswa inner join kelas on d_mahasiswa.kd_matkul = kelas.kd_matkul");
+$query=mysqli_query($conn, "SELECT  nim,nama,nama_matkul FROM mahasiswa");
 ?>
 
 <html>
@@ -21,20 +21,20 @@ $query=mysqli_query($conn, "SELECT nim,name,matkul FROM d_mahasiswa inner join k
 <div class="panel panel-body">
 
       <table class="table table-striped">
-			
+
             <th>No.</th>
             <th>NIM</th>
             <th>NAMA</th>
-			<!--<th>Mata Kuliah</th>-->
-        
+			      <th>Mata Kuliah</th>
+
 		 <?php
             $no = 1;
             while($data = mysqli_fetch_assoc($query)):
         ?>
 		<tr><td><?php echo $no; ?></td>
 			<td><?php echo $data["nim"]; ?></td>
-			<td><?php echo $data["name"]; ?></td>
-			<!--<td><?php echo $data["matkul"]; ?></td>-->
+			<td><?php echo $data["nama"]; ?></td>
+			<td><?php echo $data["nama_matkul"]; ?></td>
 			<td></td>
 		</tr>
 		<?php $no++; ?>
@@ -42,7 +42,7 @@ $query=mysqli_query($conn, "SELECT nim,name,matkul FROM d_mahasiswa inner join k
 </table>
 
 </div>
-<br><br>			
+<br><br>
 </body>
 </html>
  <?php

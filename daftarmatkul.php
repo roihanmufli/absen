@@ -1,7 +1,8 @@
 <?php
+require_once "koneksi.php";
 include("header.php");
-$conn = mysqli_connect('localhost','root','','db_log');
-$query=mysqli_query($conn, "SELECT*FROM kelas") ;
+
+$query=mysqli_query($conn, "SELECT kode_matkul, nama_matkul FROM matkul") ;
 ?>
 
 <html>
@@ -30,13 +31,13 @@ $query=mysqli_query($conn, "SELECT*FROM kelas") ;
             while($data = mysqli_fetch_assoc($query)):
         ?>
 		<tr><td><?php echo $no; ?></td>
-			<td><?php echo $data["kd_matkul"]; ?></td>
-			<td><?php echo $data["matkul"]; ?></td>
+			<td><?php echo $data["kode_matkul"]; ?></td>
+			<td><?php echo $data["nama_matkul"]; ?></td>
 		</tr>
 		<?php $no++; ?>
 		<?php endwhile; ?>
 </table>
-</div>			
+</div>
 </body>
 
 

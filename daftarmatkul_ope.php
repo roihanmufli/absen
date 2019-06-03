@@ -1,7 +1,7 @@
 <?php
 include("header_admin.php");
-$conn = mysqli_connect('localhost','root','','db_log');
-$query=mysqli_query($conn, "SELECT*FROM kelas inner join dosen on kelas.kd_matkul=dosen.kd_matkul") ;
+require_once "koneksi.php";
+$query=mysqli_query($conn, "SELECT matkul.kode_matkul, matkul.nama_matkul, login.nama FROM matkul inner join login on matkul.kode_dosen=login.kode") ;
 ?>
 
 <html>
@@ -23,7 +23,7 @@ $query=mysqli_query($conn, "SELECT*FROM kelas inner join dosen on kelas.kd_matku
             <th>No.</th>
             <th>Kode Mata Kuliah</th>
             <th>Mata Kuliah</th>
-			<th>Dosen<th>
+			      <th>Dosen<th>
 
         </tr>
 		 <?php
@@ -31,14 +31,14 @@ $query=mysqli_query($conn, "SELECT*FROM kelas inner join dosen on kelas.kd_matku
             while($data = mysqli_fetch_assoc($query)):
         ?>
 		<tr><td><?php echo $no; ?></td>
-			<td><?php echo $data["kd_matkul"]; ?></td>
-			<td><?php echo $data["matkul"]; ?></td>
+			<td><?php echo $data["kode_matkul"]; ?></td>
+			<td><?php echo $data["nama_matkul"]; ?></td>
 			<td><?php echo $data["nama"]; ?></td>
 		</tr>
 		<?php $no++; ?>
 		<?php endwhile; ?>
 </table>
-</div>			
+</div>
 </body>
 
 

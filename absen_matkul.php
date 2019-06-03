@@ -1,7 +1,7 @@
 <?php
 include('header.php');
-include('koneksi.php');
-$query=mysqli_query($conn, "SELECT*FROM kelas") ;
+require_once('koneksi.php');
+$query=mysqli_query($conn, "SELECT * FROM matkul") ;
 
  ?>
 
@@ -13,16 +13,20 @@ $query=mysqli_query($conn, "SELECT*FROM kelas") ;
 	</div>
 	  <h3><div class="well text-center">Date : <?php echo date('Y-m-d'); ?></div></h3>
  <div class="container">
-   <h2 style="text-align: center;">Daftar Mata Kuliah</h2>
-   <div class="list-group">
-   		 <?php
-            $no = 1;
-            while($data = mysqli_fetch_assoc($query)):
-        ?>
-     <a href="absen_index.php" class="list-group-item text-center"><?php echo $data["matkul"]; ?></a>
+   <form class="" action="absen_index.php" method="get">
+     <h2 style="text-align: center;">Daftar Mata Kuliah</h2>
+     <div class="list-group">
+          <?php
+              $no = 1;
+              while($data = mysqli_fetch_assoc($query)):
+          ?>
+          <input type="submit" style="width:100%;" class="list-group-item text-center" name="pilih" value="<?php echo $data["nama_matkul"]; ?>">
 
-	 		<?php endwhile; ?>
-   </div>
+
+       <?php endwhile; ?>
+     </div>
+   </form>
+
  </div>
 
  <?php

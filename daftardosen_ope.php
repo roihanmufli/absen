@@ -1,7 +1,7 @@
 <?php
 include('header_admin.php');
-$conn = mysqli_connect('localhost','root','','db_log');
-$query=mysqli_query($conn,"select * from login where level='dosen'");
+require_once "koneksi.php";
+$query=mysqli_query($conn,"select kode,nama,email,notelp from login where status='dosen'");
 ?>
 <html>
 
@@ -22,11 +22,11 @@ $query=mysqli_query($conn,"select * from login where level='dosen'");
       <table class="table table-striped">
 			<tr>
             <th>No.</th>
-            <th>NIK</th>
+            <th>Kode Dosen</th>
             <th>NAMA</th>
-			<th>E-mail</th>
-			<th>No.telp</th>
-        </tr>
+			      <th>E-mail</th>
+			      <th>No.telp</th>
+      </tr>
 		 <?php
 
             $no = 1;
@@ -34,7 +34,7 @@ $query=mysqli_query($conn,"select * from login where level='dosen'");
 
         ?>
 		<tr><td><?php echo $no; ?></td>
-			<td><?php echo $data["username"]; ?></td>
+      <td><?php echo $data["kode"]; ?></td>
 			<td><?php echo $data["nama"]; ?></td>
 			<td><?php echo $data["email"]; ?></td>
 			<td><?php echo $data["notelp"]; ?></td></tr>
@@ -43,7 +43,7 @@ $query=mysqli_query($conn,"select * from login where level='dosen'");
 </table>
 
 </div>
-			
+
 </body>
 
  <?php

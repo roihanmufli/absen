@@ -1,5 +1,11 @@
 <?php
-{
+session_start();
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +28,8 @@
     <![endif]-->
   </head>
   <body>
-  <?php 
-  
+  <?php
+
   ?>
 
   <div class="jumbotron">
@@ -34,7 +40,7 @@
       <h1>Dosen</h1>
     </div>
     <div class="col-md-2">
-      <a href="login.php" class="btn btn-info" role="button">Logout</a>
+      <a href="logout.php" class="btn btn-info" role="button">Logout</a>
     </div>
   </div>
 
@@ -95,7 +101,3 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
-
-<?php
-}
-?>

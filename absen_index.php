@@ -1,6 +1,7 @@
 <?php
-include("koneksi.php");
+require_once("koneksi.php");
 include('header.php');
+
 
 
 $flag = 0;
@@ -9,8 +10,9 @@ if(isset($_POST['submit']))
 {
 
   $date = date('Y-m-d');
+  $nama_matkul= $_POST['nama_matkul'];
 
-  $records = mysqli_query($conn,"select * from attendance_records where date ='$date'");
+  $records = mysqli_query($conn,"select * from attendance_records where date ='$date' and nama_matkul ='$nama_matkul' ");
   $num = mysqli_num_rows($records);
 
   if($num)
@@ -18,10 +20,12 @@ if(isset($_POST['submit']))
     foreach($_POST['status'] as $id=>$status)
     {
       $nim = $_POST['nim'][$id];
-      $name = $_POST['name'][$id];
+      $name = $_POST['nama'][$id];
+      $nama_matkul = $_POST['nama_matkul'][$id];
 
 
-      $result = mysqli_query($conn,"update attendance_records set nim = '$nim', name = '$name', status = '$status', date = '$date' where date = '$date' and name = '$name';");
+
+      $result = mysqli_query($conn,"update attendance_records set nim = '$nim', name = '$name',nama_matkul= '$nama_matkul', status = '$status', date = '$date' where date = '$date' and name = '$name';");
       if($result)
       {
         $update= 1;
@@ -31,14 +35,15 @@ if(isset($_POST['submit']))
   }
   else {
 
-
       foreach($_POST['status'] as $id=>$status)
       {
         $nim = $_POST['nim'][$id];
-        $name = $_POST['name'][$id];
+        $name = $_POST['nama'][$id];
+        $nama_matkul = $_POST['nama_matkul'][$id];
 
 
-        $result = mysqli_query($conn,"insert into attendance_records(nim,name,status,date) values('$nim','$name','$status','$date')");
+
+        $result = mysqli_query($conn,"insert into attendance_records values('$nim','$name','$nama_matkul','$status','$date')");
         if($result)
         {
           $flag = 1;
@@ -56,6 +61,7 @@ if(isset($_POST['submit']))
 	<a class="btn btn-info center" href="dosen.php">Home</a>
 	<a class="btn btn-info center" href="absen_viewall.php">View Attendance</a>
 	<a class="btn btn-info center" href="daftarsiswa.php">Student Data</a>
+  <a class="btn btn-info center" href="absen_matkul.php">Back</a>
     </h2>
 	</div>
     <?php if($flag) { ?>
@@ -68,7 +74,7 @@ if(isset($_POST['submit']))
     <div class="alert alert-success">
       Student Attendance Updated Successfully
     </div>
-    <?php } ?>
+  <?php } ?>
 
 
   <h3><div class="well text-center">Date : <?php echo date('Y-m-d'); ?></div></h3>
@@ -78,8 +84,19 @@ if(isset($_POST['submit']))
         <th>No</th>
         <th>NIM</th>
         <th>Student Name</th>
+        <th>Mata Kuliah</th>
         <th>Attendance Status</th>
-        <?php $result=mysqli_query($conn,"select * from d_mahasiswa");
+        <?php
+        if(isset($_GET['pilih']) && $_GET['pilih'] == "Praktikum Rekayasa Perangkat Lunak"){
+          $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Praktikum Rekayasa Perangkat Lunak'");
+        }
+        elseif(isset($_GET['pilih']) && $_GET['pilih'] == "Data Mining dan Data Warehouse"){
+          $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Data Mining dan Data Warehouse'");
+        }
+        elseif(isset($_GET['pilih']) && $_GET['pilih'] == "Pengolahan Citra Digital"){
+          $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Pengolahan Citra Digital'");
+        }
+
           $serialnumber = 0;
           $counter=0;
           while($row=mysqli_fetch_array($result)){
@@ -90,8 +107,11 @@ if(isset($_POST['submit']))
           <td><?php echo $row['nim']; ?>
           <input type="hidden" value="<?php echo $row['nim']; ?>" name="nim[]" >
           </td>
-          <td><?php echo $row['name']; ?>
-          <input type="hidden" value="<?php echo $row['name']; ?>" name="name[]">
+          <td><?php echo $row['nama']; ?>
+          <input type="hidden" value="<?php echo $row['nama']; ?>" name="nama[]">
+          </td>
+          <td><?php echo $row['nama_matkul']; ?>
+          <input type="hidden" value="<?php echo $row['nama_matkul']; ?>" name="nama_matkul[]">
           </td>
 
           <td>

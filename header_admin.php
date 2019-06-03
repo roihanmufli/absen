@@ -28,6 +28,6 @@
       <h1>Admin</h1>
     </div>
     <div class="col-md-2">
-      <a href="login.php" class="btn btn-info" role="button">Logout</a>
+      <a href="logout.php" class="btn btn-info" role="button">Logout</a>
     </div>
   </div>
