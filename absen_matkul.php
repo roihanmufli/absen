@@ -13,7 +13,7 @@ $query=mysqli_query($conn, "SELECT * FROM matkul") ;
 	</div>
 	  <h3><div class="well text-center">Date : <?php echo date('Y-m-d'); ?></div></h3>
  <div class="container">
-   <form class="" action="absen_index.php" method="get">
+   <form class="" action="absen_index.php" method="post">
      <h2 style="text-align: center;">Daftar Mata Kuliah</h2>
      <div class="list-group">
           <?php

@@ -3,17 +3,18 @@ require_once("koneksi.php");
 include('header.php');
 
 
-
 $flag = 0;
 $update = 0;
 if(isset($_POST['submit']))
 {
 
   $date = date('Y-m-d');
-  $nama_matkul= $_POST['nama_matkul'];
+  $nama_matkul = $_POST['nama_matkul'];
 
-  $records = mysqli_query($conn,"select * from attendance_records where date ='$date' and nama_matkul ='$nama_matkul' ");
-  $num = mysqli_num_rows($records);
+  $records = mysqli_query($conn,"select * from attendance_records where date = '$date' and nama_matkul = '$nama_matkul' ");
+
+   $num = mysqli_num_rows($records);
+
 
   if($num)
   {
@@ -25,7 +26,8 @@ if(isset($_POST['submit']))
 
 
 
-      $result = mysqli_query($conn,"update attendance_records set nim = '$nim', name = '$name',nama_matkul= '$nama_matkul', status = '$status', date = '$date' where date = '$date' and name = '$name';");
+
+      $result = mysqli_query($conn,"update attendance_records set nim = '$nim', name = '$name', nama_matkul = '$nama_matkul', status = '$status' where date = '$date' and nama_matkul = '$nama_matkul' and nim = '$nim';");
       if($result)
       {
         $update= 1;
@@ -43,7 +45,7 @@ if(isset($_POST['submit']))
 
 
 
-        $result = mysqli_query($conn,"insert into attendance_records values('$nim','$name','$nama_matkul','$status','$date')");
+        $result = mysqli_query($conn,"insert into attendance_records(nim,name,nama_matkul,status,date) values('$nim','$name','$nama_matkul','$status','$date')");
         if($result)
         {
           $flag = 1;
@@ -87,13 +89,13 @@ if(isset($_POST['submit']))
         <th>Mata Kuliah</th>
         <th>Attendance Status</th>
         <?php
-        if(isset($_GET['pilih']) && $_GET['pilih'] == "Praktikum Rekayasa Perangkat Lunak"){
+        if(isset($_POST['pilih']) && $_POST['pilih'] == "Praktikum Rekayasa Perangkat Lunak"){
           $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Praktikum Rekayasa Perangkat Lunak'");
         }
-        elseif(isset($_GET['pilih']) && $_GET['pilih'] == "Data Mining dan Data Warehouse"){
+        elseif(isset($_POST['pilih']) && $_POST['pilih'] == "Data Mining dan Data Warehouse"){
           $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Data Mining dan Data Warehouse'");
         }
-        elseif(isset($_GET['pilih']) && $_GET['pilih'] == "Pengolahan Citra Digital"){
+        elseif(isset($_POST['pilih']) && $_POST['pilih'] == "Pengolahan Citra Digital"){
           $result=mysqli_query($conn,"select * from mahasiswa where nama_matkul ='Pengolahan Citra Digital'");
         }
 

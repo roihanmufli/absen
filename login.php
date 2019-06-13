@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	}
 
 	if(empty(trim($_POST['userkode'])) && empty(trim($_POST['pass']))){
-		$pass_err= "please enter username and password";
+		$userkode_err= "please enter username and password";
 	}
 	elseif(empty(trim($_POST['pass']))){
 		$pass_err = "please enter password";
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
-	if(empty($username_err) && empty($pass_err)){
+	if(empty($userkode_err) && empty($pass_err)){
 		//prepare select statement
 		$sql = "select kode,nama,username,pass,status from login where username = ? or kode = ?";
 		if($stmt = mysqli_prepare($conn,$sql)){
@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					}
 				}
 				else {
-					$username_err = "No account found with that username.";
+					$userkode_err = "No account found with that username.";
 				}
 			}else {
 				echo "Oops! Something went wrong. Please try again later.";
@@ -101,10 +101,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
   <div class="form">
 		<?php
-			if($username_err){
+			if($userkode_err){
 		 ?>
 		<div class="alert alert-danger">
-			<?php echo $username_err; ?>
+			<?php echo $userkode_err; ?>
 		</div>
 		<?php  } ?>
 
